@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-language" content="ja">
+        <meta name="author" content="kyouki-radio">
+        <meta name="description" content="キョウキになるらじヲ">
+        <link rel="stylesheet" href="/css/main.css" type="text/css">
+        <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
+        <title>投稿フォーム | キョウキになるらじヲ</title>
+    </head>
+    <body>
+        <header>
+            <h1><a href="/radio/">キョウキになるらじヲ</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="/radio/about/">「キョウキになるらじヲ」とは</a></li>
+                    <li><a href="/radio/corner/">コーナー紹介</a></li>
+                    <li><a href="/radio/form/">投稿フォーム</a></li>
+                    <li><a href="/radio/archive/">アーカイブ</a></li>
+                    <li><a href="/radio/contact/">コンタクト</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <article>
+                <header>
+                    <h2>投稿フォーム</h2>
+                </header>
+                <section>
+                    <p>
+                        番組の各コーナーへの投稿やふつおたなどに加え、アイデア・ご意見・ご感想をお送りください。<br>
+                        直接、番組のメールアドレス「<a href="mailto:kyouki.radio@gmail.com">kyouki.radio@gmail.com</a>」までお送りいただいても結構です。<br>
+                        特にセキュリティ対策をしているわけではないので、匿名希望でなければそちらのほうが安全で楽だと思います。
+                    </p>
+                    <p>
+                        権利関係のお話など、番組運営者に連絡を取りたい場合は<a href="/radio/contact/">コンタクト</a>よりどうぞ。
+                    </p>
+                </section>
+                <section>
+                    <form id="gform" action="https://script.google.com/macros/s/AKfycbyoHOZo-l9ZJSIMOoB7os5njnEI6TMVg2KEdoLdJ6Q3rLVtC6g/exec" method="POST" enctype="text/plain">
+                        <input type="text" id="form_honeypot" value="" style="display:none;">
+                        <input type="text" id="form_sender" name="sender" placeholder="名前（空欄は「絶対匿名希望さん」になります）" autofocus>
+                        <input type="text" name="email" placeholder="メールアドレス（なくても構いません）">
+                        <input type="text" name="subject" placeholder="件名（コーナー名など）" required>
+                        <textarea id="ta" name="body" placeholder="本文（You、ハジけちゃいなヨ！など）" required></textarea>
+                        <input type="submit" value="送信">
+                    </form>
+                </section>
+            </article>
+        </main>
+        <footer>
+            <ul class="social">
+                <li><a href="https://www.youtube.com/channel/UC7i1B-fPFYvo4USGoMywpgQ" title="YouTube"><span class="socicon-youtube"></span></a></li>
+                <li><a href="http://www.nicovideo.jp/user/79302429" title="ニコニコ動画"><span class="socicon-niconico"></span></a></li>
+                <li><a href="https://soundcloud.com/kyouki-radio" title="SoundCloud"><span class="socicon-soundcloud"></span></a></li>
+                <li><a href="https://twitter.com/kyouki_radio" title="Twitter"><span class="socicon-twitter"></span></a></li>
+                <li><a href="https://github.com/kyouki-radio/" title="GitHub"><span class="socicon-github"></span></a></li>
+            </ul>
+        </footer>
+        <script>
+            ;(function(){
+                // form on submit
+                var gform = document.getElementById('gform')
+                
+                gform.addEventListener("submit", function(e){
+                    let form = e.target
+                    let honeypot = document.getElementById('form_honeypot')
+                    let sender = document.getElementById('form_sender')
+                    if (honeypot.value) {   // SPAM avoidance
+                        e.preventDefault()
+                        return false
+                    }
+                    if (!confirm('送信しますか？')) {
+                        e.preventDefault()
+                        return false
+                    }
+                    sender.value = sender.value || '絶対匿名希望さん'
+                }, false)
+                
+                // textarea
+                var ta = document.getElementById("ta")
+                ta.style.height = '2em'
+                ta.style.lineHeight = '1.5'
+                
+                ta.addEventListener("input", function(e){
+                    let ta = e.target
+                    if(ta.scrollHeight > ta.offsetHeight){   
+                        ta.style.height = ta.scrollHeight + "px"
+                    }else{
+                        var height,lineHeight
+                        while (true){
+                            height = parseInt(ta.style.height, 10)
+                            lineHeight = parseInt(ta.style.lineHeight, 10)
+                            ta.style.height = height - lineHeight + "px"
+                            if(ta.scrollHeight > ta.offsetHeight){
+                                ta.style.height = ta.scrollHeight + "px"
+                                break
+                            }
+                        }
+                    }
+                }, false)
+            })()
+        </script>
+    </body>
+</html>
